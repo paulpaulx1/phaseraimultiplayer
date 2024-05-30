@@ -4,7 +4,7 @@
   "description": "A online Pokemon MMO game build with Phaser 3 & Colyseus.io",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack --config webpack/prod.js",
+    "build": "webpack --config webpack/prod.js --output public",
     "start": "webpack-dev-server --config webpack/base.js --open"
   },
   "license": "MIT",
