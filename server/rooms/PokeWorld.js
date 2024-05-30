@@ -52,9 +52,8 @@ exports.PokeWorld = class extends colyseus.Room {
             });
         });
 
-        room.onMessage("NPC_CHAT", message => {
+        this.onMessage("NPC_CHAT", message => {
             console.log("NPC_CHAT", message);
-            displayNPCChat(message.npcId, message.message);
         });
 
     }
