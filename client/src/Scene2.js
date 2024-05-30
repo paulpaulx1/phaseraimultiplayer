@@ -221,9 +221,7 @@ export class Scene2 extends Phaser.Scene {
     this.physics.add.overlap(
       this.player,
       this.npc,
-      () => {
-        this.handleNPCInteraction();
-      },
+      this.handleNPCOverlap,
       null,
       this
     );
@@ -253,6 +251,14 @@ export class Scene2 extends Phaser.Scene {
     });
   }
 
+  handleNPCOverlap() {
+    if (!this.npcInteracted) {
+      this.handleNPCInteraction();
+      this.npcInteracted = true; // Set the flag to true after interaction
+    }
+    setTimeout(function(){this.npcInteracted = false},3000);
+  }
+
   handleNPCInteraction() {
     const message = "Howdy";
     this.npc.showChatMessage(message);
@@ -267,6 +273,7 @@ export class Scene2 extends Phaser.Scene {
   update(time, delta) {
     // Loop the player update method
     this.player.update(time, delta);
+    this.npc.update(); // Update the NPC
 
     // Horizontal movement
     if (cursors.left.isDown) {
