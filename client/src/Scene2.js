@@ -178,25 +178,19 @@ export class Scene2 extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-        // Help text that has a "fixed" position on the screen
-        // this.add
-        //     .text(16, 16, "Arrow keys to move\nPress \"D\" to show hitboxes", {
-        //         font: "18px monospace",
-        //         fill: "#000000",
-        //         padding: { x: 20, y: 10 },
-        //         backgroundColor: "#ffffff"
-        //     })
-        //     .setScrollFactor(0)
-        //     .setDepth(30);
-
         this.debugGraphics();
 
         this.movementTimer();
 
         // Add event listener for chat input
         const chatInput = document.getElementById('chatInput');
-        chatInput.addEventListener('keypress', (event) => {
+        chatInput.addEventListener('keydown', (event) => {
+            console.log(event.key, event.keyCode);
+            if (event.keyCode === 32) {
+                chatInput.value+= ' ';
+            }
             if (event.key === 'Enter') {
+                event.preventDefault();
                 const message = chatInput.value;
                 chatInput.value = '';
                 this.sendMessage(message);
