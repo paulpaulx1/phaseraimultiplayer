@@ -25,7 +25,6 @@ gameServer.define("poke_world", PokeWorld)
     .on("join", (room, client) => console.log(client.id, "joined", room.roomId))
     .on("leave", (room, client) => console.log(client.id, "left", room.roomId));
 
-// ToDo: Create a 'chat' room for realtime chatting
 
 /**
  * Register @colyseus/social routes
