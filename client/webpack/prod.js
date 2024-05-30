@@ -7,7 +7,8 @@ module.exports = merge(base, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "bundle.min.js"
+    filename: "bundle.min.js",
+    publicPath: "../dist"
   },
   devtool: false,
   performance: {
