@@ -59,10 +59,15 @@ async function joinRoom() {
         // Handle player leaving
         room.onMessage("PLAYER_LEFT", message => {
             console.log("PLAYER_LEFT", message);
-            delete onlinePlayers[message.sessionId];
             removePlayer(message.sessionId);
+            delete onlinePlayers[message.sessionId];
         });
 
+        //handle NPC chat
+        room.onMessage("NPC_CHAT", message => {
+            console.log("NPC_CHAT", message);
+            displayNPCChat(message.npcId, message.message);
+        });
         // Handle room leave
         room.onLeave(() => {
             console.log('LEFT ROOM');
@@ -107,7 +112,17 @@ function updatePlayerMap(sessionId, map) {
 function removePlayer(sessionId) {
     // Remove the player from the game
     console.log(`Removing player ${sessionId}`);
+    if (onlinePlayers[sessionId]) {
+        onlinePlayers[sessionId].destroy();
+        delete onlinePlayers[sessionId];
+    }
     // Add your game-specific logic here to remove the player from the game
+}
+
+function displayNPCChat(npcId, message) {
+    // Add your game-specific logic here to display the NPC chat message in the game
+    console.log(`Displaying chat message from NPC ${npcId}: ${message}`);
+    // You will need to ensure this logic updates the NPC chat bubble in the game
 }
 
 export { onlinePlayers, room };

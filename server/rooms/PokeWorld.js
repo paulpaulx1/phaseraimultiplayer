@@ -37,15 +37,26 @@ exports.PokeWorld = class extends colyseus.Room {
             });
         });
 
-        // Add PLAYER_CHAT message handler
         this.onMessage("PLAYER_CHAT", (player, data) => {
-            console.log(data.message);
             this.broadcast("PLAYER_CHAT", {
                 sessionId: player.sessionId,
                 message: data.message
             }
         );
         });
+
+        this.onMessage("NPC_CHAT", (player, data) => {
+            this.broadcast("NPC_CHAT", {
+                npcId: data.npcId,
+                message: data.message
+            });
+        });
+
+        room.onMessage("NPC_CHAT", message => {
+            console.log("NPC_CHAT", message);
+            displayNPCChat(message.npcId, message.message);
+        });
+
     }
 
     onJoin(player, options) {
@@ -60,8 +71,8 @@ exports.PokeWorld = class extends colyseus.Room {
             y: 1216
         };
 
-        setTimeout(() => player.send("CURRENT_PLAYERS", { players: players }), 500);
         this.broadcast("PLAYER_JOINED", { ...players[player.sessionId] }, { except: player });
+        setTimeout(() => player.send("CURRENT_PLAYERS", { players: players }), 500);
 
         console.log("PLAYERS", players);
     }
