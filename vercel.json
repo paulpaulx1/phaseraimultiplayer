@@ -6,18 +6,22 @@
         "use": "@vercel/node"
       },
       {
-        "src": "client/index.html",
-        "use": "@vercel/static"
+        "src": "client/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "client/dist"
+        }
       }
     ],
     "routes": [
       {
         "src": "/api/(.*)",
-        "dest": "server/server.js"
+        "dest": "/server/server.js"
       },
       {
         "src": "/(.*)",
-        "dest": "client/index.html"
+        "dest": "/client/dist/$1"
       }
     ]
   }
+  
