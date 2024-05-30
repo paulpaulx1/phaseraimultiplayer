@@ -31,18 +31,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
         this.canChangeMap = true;
 
-        // Player nickname text
-        this.playerNickname = this.scene.add.text(this.x, this.y - 25, 'Player').setOrigin(0.5);
-
-        // Add spacebar input
-        this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
         // Chat bubble
         this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', {
             fontSize: '12px',
             fill: '#fff',
-            backgroundColor: '#000'
+            backgroundColor: '#000',
+            padding: { x: 10, y: 5 }
         }).setOrigin(0.5).setVisible(false);
+
+        // Add spacebar input
+        this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // Initialize room and event listeners
         this.initializeRoom();
@@ -54,9 +52,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     update(time, delta) {
         const prevVelocity = this.body.velocity.clone();
-
-        // Show player nickname above player
-        this.showPlayerNickname();
 
         // Player door interaction
         this.doorInteraction();
@@ -107,16 +102,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
         if (this.isMoved()) {
             this.room.send("PLAYER_MOVED", { x: this.x, y: this.y });
         }
-    }
 
-    showPlayerNickname() {
-        this.playerNickname.setPosition(this.x, this.y - 25);
-        this.chatBubble.setPosition(this.x, this.y - 45);
+        // Update chat bubble position
+        if (this.chatBubble.visible) {
+            this.chatBubble.setPosition(this.x, this.y - 45);
+        }
     }
 
     showChatMessage(message) {
         this.chatBubble.setText(message).setVisible(true);
-
+        console.log(this.chatBubble.text)
         // Hide chat bubble after 3 seconds
         this.scene.time.addEvent({
             delay: 3000,

@@ -17,7 +17,7 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
         this.body.setOffset(0, 24);
 
         // Display playerId above player
-        this.playerNickname = this.scene.add.text(this.x, this.y - 25, config.playerId).setOrigin(0.5);
+        // this.playerNickname = this.scene.add.text(this.x, this.y - 25, config.playerId).setOrigin(0.5);
 
         // Chat bubble
         this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', {
@@ -33,7 +33,7 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
         this.setPosition(x, y);
 
         // PlayerId
-        this.playerNickname.setPosition(this.x, this.y - 25);
+        // this.playerNickname.setPosition(this.x, this.y - 25);
         this.chatBubble.setPosition(this.x, this.y - 45);
     }
 
@@ -44,9 +44,7 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
 
     showChatMessage(message) {
         this.chatBubble.setText(message).setVisible(true);
-
-        console.log(message);
-
+        
         // Hide chat bubble after 3 seconds
         this.scene.time.addEvent({
             delay: 3000,
@@ -58,7 +56,6 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
 
     destroy() {
         super.destroy();
-        this.playerNickname.destroy();
         this.chatBubble.destroy();
     }
 }

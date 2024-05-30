@@ -43,7 +43,8 @@ exports.PokeWorld = class extends colyseus.Room {
             this.broadcast("PLAYER_CHAT", {
                 sessionId: player.sessionId,
                 message: data.message
-            }, { except: player });
+            }
+        );
         });
     }
 

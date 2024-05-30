@@ -185,7 +185,6 @@ export class Scene2 extends Phaser.Scene {
         // Add event listener for chat input
         const chatInput = document.getElementById('chatInput');
         chatInput.addEventListener('keydown', (event) => {
-            console.log(event.key, event.keyCode);
             if (event.keyCode === 32) {
                 chatInput.value+= ' ';
             }
@@ -194,12 +193,14 @@ export class Scene2 extends Phaser.Scene {
                 const message = chatInput.value;
                 chatInput.value = '';
                 this.sendMessage(message);
-                console.log(message);
             }
         });
     }
 
     sendMessage(message) {
+
+        this.player.showChatMessage(message);
+
         room.then(roomInstance => {
             roomInstance.send("PLAYER_CHAT", {
                 message: message
