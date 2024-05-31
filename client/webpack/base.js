@@ -12,7 +12,6 @@ module.exports = {
     filename: "bundle.js",
     publicPath: "/"
   },
-
   module: {
     rules: [
       {
