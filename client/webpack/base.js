@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   mode: "development",
   devtool: "eval-source-map",
-  entry: '../src/index.js',  // Define the entry point here
+  entry: './src/index.js',  // Define the entry point here
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "bundle.js",
