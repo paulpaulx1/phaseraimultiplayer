@@ -17,7 +17,7 @@ if (isLocal) {
     client = new Colyseus.Client('ws://phaseraimultiplayer.vercel.app');
 }
 
-console.log('client');
+console.log('client', client);
 
 
 async function joinRoom() {
