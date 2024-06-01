@@ -14,22 +14,22 @@
         }
       }
     ],
-    "routes": [
+    "rewrites": [
       {
-        "src": "/api/(.*)",
-        "dest": "/server/server.js"
+        "source": "/api/:path*",
+        "destination": "/server/server.js"
       },
       {
-        "src": "/(.*)",
-        "dest": "/client/$1"
+        "source": "/colyseus/:path*",
+        "destination": "/server/server.js"
       },
       {
-        "src": "/colyseus/(.*)",
-        "dest": "/server/server.js"
+        "source": "/matchmake/:path*",
+        "destination": "/server/server.js"
       },
       {
-        "src": "/matchmake/(.*)",
-        "dest": "/server/server.js"
+        "source": "/:path*",
+        "destination": "/client/:path*"
       }
     ],
     "cleanUrls": true
