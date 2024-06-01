@@ -18,16 +18,17 @@ const gameServer = new colyseus.Server({
   server: server,
 });
 
-// Log server initialization
-console.log(`Initializing Colyseus server on port ${port}`);
-
 // Register your room handlers
-gameServer
-  .define("poke_world", PokeWorld)
-  .on("create", (room) => console.log("room created:", room.roomId))
-  .on("dispose", (room) => console.log("room disposed:", room.roomId))
-  .on("join", (room, client) => console.log(client.id, "joined", room.roomId))
-  .on("leave", (room, client) => console.log(client.id, "left", room.roomId));
+try {
+  gameServer
+    .define("poke_world", PokeWorld)
+    .on("create", (room) => console.log("room created:", room.roomId))
+    .on("dispose", (room) => console.log("room disposed:", room.roomId))
+    .on("join", (room, client) => console.log(client.id, "joined", room.roomId))
+    .on("leave", (room, client) => console.log(client.id, "left", room.roomId));
+} catch (error) {
+  console.error("Error registering room handlers:", error);
+}
 
 // Chatbot endpoint
 app.post('/api/chat', async (req, res) => {
@@ -43,14 +44,27 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Register Colyseus monitor AFTER registering your room handlers
-app.use("/colyseus", monitor(gameServer));
-
-// Start the server
-gameServer.listen(port, () => {
-  console.log(`Listening on ws://localhost:${port}`);
-});
+try {
+  app.use("/colyseus", monitor(gameServer));
+} catch (error) {
+  console.error("Error setting up Colyseus monitor:", error);
+}
 
 // Ensure the server is accessible
 app.get('/health', (req, res) => {
-  res.status(200).send('Server is running');
+  try {
+    res.status(200).send('Server is running');
+  } catch (error) {
+    console.error("Health check failed:", error);
+    res.status(500).send('Server is not healthy');
+  }
 });
+
+// Start the server
+try {
+  gameServer.listen(port, () => {
+    console.log(`Listening on ws://localhost:${port}`);
+  });
+} catch (error) {
+  console.error("Error starting the server:", error);
+}
