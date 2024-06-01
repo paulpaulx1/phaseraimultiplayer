@@ -15,7 +15,7 @@ let client;
 if (isLocal) {
     client = new Colyseus.Client('ws://localhost:3000' );
 } else {
-    client = new Colyseus.Client('wss://phaseraimultiplayer.vercel.app');
+    client = new Colyseus.Client('wss://'+window.location.host);
 }
 
 console.log('client', client);
