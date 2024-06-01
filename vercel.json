@@ -28,7 +28,7 @@
         "dest": "/client/$1"
       },
       {
-        "src": "/colyseus",
+        "src": "/colyseus/(.*)",
         "dest": "/server/server.js"
       },
 
