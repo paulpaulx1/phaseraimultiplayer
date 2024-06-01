@@ -4,16 +4,19 @@ import * as Colyseus from "colyseus.js";
 | Array with current online players
 */
 let onlinePlayers = {};
+let npc;
 
 /*================================================
 | Colyseus connection with server
 */
-const client = new Colyseus.Client('ws://localhost:3000');
+const client = new Colyseus.Client('ws://localhost:3000' );
 
 async function joinRoom() {
     try {
         const room = await client.joinOrCreate("poke_world");
         console.log(room.sessionId, "joined", room.name);
+        console.log('npc',room.npc)
+
 
         // Handle receiving current players
         room.onMessage("CURRENT_PLAYERS", message => {
@@ -65,8 +68,9 @@ async function joinRoom() {
 
         //handle NPC chat
         room.onMessage("NPC_CHAT", message => {
-            console.log("NPC_CHAT", message);
-            displayNPCChat(message.npcId, message.message);
+            console.log('the message the message', message);
+            const { npcId, message: response } = message;
+            console.log("NPC_CHATksjdsfkjjas", message);
         });
         // Handle room leave
         room.onLeave(() => {

@@ -3,12 +3,18 @@ import { onlinePlayers, room } from "./SocketServer";
 import OnlinePlayer from "./OnlinePlayer";
 import Player from "./Player";
 import NPC from "./NPC";
+import { sendAIMessage } from "./chat";
 
+let roomSessionId;
 let cursors, socketKey;
+let npc;
+
+const chatToggle = document.getElementById("chat-toggle");
 
 export class Scene2 extends Phaser.Scene {
   constructor() {
     super("playGame");
+    this.npcs = {};
   }
 
   init(data) {
@@ -26,6 +32,7 @@ export class Scene2 extends Phaser.Scene {
     room.then((roomInstance) => {
       roomInstance.onMessage("CURRENT_PLAYERS", (data) => {
         console.log("CURRENT_PLAYERS", data);
+        roomSessionId = roomInstance.sessionId;
 
         Object.keys(data.players).forEach((playerId) => {
           let player = data.players[playerId];
@@ -134,8 +141,6 @@ export class Scene2 extends Phaser.Scene {
         }
       });
 
-      //handle NPC chat
-
       // Handle chat messages
       roomInstance.onMessage("PLAYER_CHAT", (data) => {
         if (data.sessionId === roomInstance.sessionId) {
@@ -147,7 +152,9 @@ export class Scene2 extends Phaser.Scene {
 
       roomInstance.onMessage("NPC_CHAT", (data) => {
         console.log("NPC_CHAT received", data); // Debug log
-        this.npc.showChatMessage(data.message);
+        const { response }= data;
+        console.log('response message', response);
+        this.npc.showChatMessage(response);
       });
     });
 
@@ -214,8 +221,10 @@ export class Scene2 extends Phaser.Scene {
       scene: this,
       key: "player", // This should be the key for the NPC's sprite
       x: spawnPoint.x + 100, // Set the desired x position
-      y: spawnPoint.y - 100, // Set the desired y position
+      y: spawnPoint.y - 200, // Set the desired y position
     });
+
+    this.npcs[this.npc.id] = this.npc;
 
     // Add interaction with NPC
     this.physics.add.overlap(
@@ -232,9 +241,13 @@ export class Scene2 extends Phaser.Scene {
       if (event.keyCode === 32) {
         chatInput.value += " ";
       }
-      if (event.key === "Enter") {
+      if (
+        event.key === "Enter" &&
+        document.getElementById("chat-toggle").checked
+      ) {
         event.preventDefault();
         const message = chatInput.value;
+        this.handleNPCInteraction(message);
         chatInput.value = "";
         this.sendMessage(message);
       }
@@ -253,21 +266,44 @@ export class Scene2 extends Phaser.Scene {
 
   handleNPCOverlap() {
     if (!this.npcInteracted) {
-      this.handleNPCInteraction();
+      this.npc.showChatMessage("Howdy there! How the heck are ya?");
       this.npcInteracted = true; // Set the flag to true after interaction
     }
-    setTimeout(function(){this.npcInteracted = false},3000);
   }
 
-  handleNPCInteraction() {
-    const message = "Howdy";
-    this.npc.showChatMessage(message);
-    room.then((roomInstance) => {
-      roomInstance.send("NPC_CHAT", {
-        npcId: this.npc.id, // Ensure the NPC has an id if required
-        message: message,
+  handleNPCInteraction(message) {
+    console.log('NPC ID', this.npc.id);
+    if (chatToggle.checked) {
+      sendAIMessage(roomSessionId, message).then((response) => {
+        this.npc.showChatMessage(response);
+
+
+        room.then((roomInstance) => {
+          try {
+            roomInstance.send("NPC_CHAT", {
+              npcId: this.npc.id, // Ensure the NPC has an id if required
+              message: response,
+            });
+          } catch (error) {
+            console.log(error);
+          }
+          console.log("NPC_CHAT sent", message);
+        });
+
+
       });
-    });
+    }
+    // room.then((roomInstance) => {
+    //   try {
+    //     roomInstance.send("NPC_CHAT", {
+    //       npcId: this.npc.id, // Ensure the NPC has an id if required
+    //       message: message,
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    //   console.log("NPC_CHAT sent", message);
+    // });
   }
 
   update(time, delta) {
@@ -360,6 +396,10 @@ export class Scene2 extends Phaser.Scene {
     setInterval(() => {
       socketKey = true;
     }, 50);
+  }
+
+  getNPCById(npcId) {
+    return this.npcs[npcId];
   }
 
   debugGraphics() {

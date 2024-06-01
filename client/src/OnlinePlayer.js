@@ -20,7 +20,8 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
         this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', {
             fontSize: '12px',
             fill: '#fff',
-            backgroundColor: '#000'
+            backgroundColor: '#000',
+            maxWidth: 200,
         }).setOrigin(0.5).setVisible(false);
     }
 

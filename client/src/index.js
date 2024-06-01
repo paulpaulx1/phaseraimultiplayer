@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Scene1 } from "./Scene1";
 import { Scene2 } from "./Scene2";
 
+
 const Config = {
     type: Phaser.AUTO,
     width: 800,
@@ -17,4 +18,5 @@ const Config = {
     scene: [Scene1, Scene2],
 };
 
+console.log("Game Starting,a environment", process.env)
 export default new Phaser.Game(Config);

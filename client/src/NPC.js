@@ -1,9 +1,10 @@
 import Phaser from "phaser";
+import { v1 } from 'uuid';
 
 export default class NPC extends Phaser.GameObjects.Sprite {
     constructor(config) {
         super(config.scene, config.x, config.y, config.key);
-
+        this.id = 'NPC-1';
         this.scene.add.existing(this);
         this.scene.physics.world.enableBody(this);
 
@@ -14,7 +15,9 @@ export default class NPC extends Phaser.GameObjects.Sprite {
             fontSize: '12px',
             fill: '#fff',
             backgroundColor: '#000',
-            padding: { x: 10, y: 5 }
+            padding: { x: 10, y: 5 },
+            wordWrap: { width: 200, useAdvancedWrap: true },
+
         }).setOrigin(0.5).setVisible(false);
     }
 

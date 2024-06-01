@@ -45,15 +45,19 @@ exports.PokeWorld = class extends colyseus.Room {
         );
         });
 
-        this.onMessage("NPC_CHAT", (player, data) => {
-            this.broadcast("NPC_CHAT", {
-                npcId: data.npcId,
-                message: data.message
-            });
-        });
-
-        this.onMessage("NPC_CHAT", message => {
-            console.log("NPC_CHAT", message);
+        this.onMessage("NPC_CHAT", async (player, data) => {
+            const { npcId, message } = data;
+            try {
+                console.log(player, data, message);
+                // const npcResponse = await handleMessage(player.sessionId, message);
+                this.broadcast("NPC_CHAT", {
+                    npcId: npcId,
+                    response: message
+                });
+                console.log("NPC_CHAT response:", message);
+            } catch (error) {
+                console.error("Error handling NPC_CHAT:", error);
+            }
         });
 
     }
@@ -85,5 +89,10 @@ exports.PokeWorld = class extends colyseus.Room {
 
     onDispose() {
         console.log('ON DISPOSE');
+    }
+
+    handleMessage(sessionId, message) {
+        console.log('session id',sessionId,message);
+    
     }
 };
