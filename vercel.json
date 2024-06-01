@@ -31,7 +31,6 @@
         "source": "/:path*",
         "destination": "/client/:path*"
       }
-    ],
-    "cleanUrls": true
+    ]
   }
   
