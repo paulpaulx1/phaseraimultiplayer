@@ -2,8 +2,9 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const colyseus = require("colyseus");
-const { monitor } = require("@colyseus/monitor");
+const monitor = require("@colyseus/monitor").monitor;
 const { handleMessage } = require("./chatbot.js");
+
 const PokeWorld = require("./rooms/PokeWorld").PokeWorld;
 
 const port = process.env.PORT || 3000;
@@ -16,6 +17,9 @@ const server = http.createServer(app);
 const gameServer = new colyseus.Server({
   server: server,
 });
+
+// Log server initialization
+console.log(`Initializing Colyseus server on port ${port}`);
 
 // Register your room handlers
 gameServer
@@ -30,9 +34,10 @@ app.post('/api/chat', async (req, res) => {
   const { sessionId, message } = req.body;
   try {
     const response = await handleMessage(sessionId, message);
-    console.log(response);
+    console.log(`Chat response: ${response}`);
     res.json({ response });
   } catch (error) {
+    console.error(`Error handling chat message: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 });
@@ -40,7 +45,12 @@ app.post('/api/chat', async (req, res) => {
 // Register Colyseus monitor AFTER registering your room handlers
 app.use("/colyseus", monitor(gameServer));
 
+// Start the server
 gameServer.listen(port, () => {
-  const host = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://localhost:${port}`;
-  console.log(`Listening on ${host}`);
+  console.log(`Listening on ws://localhost:${port}`);
+});
+
+// Ensure the server is accessible
+app.get('/health', (req, res) => {
+  res.status(200).send('Server is running');
 });
