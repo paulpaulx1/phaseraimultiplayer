@@ -59,7 +59,9 @@ app.get('/health', (req, res) => {
     res.status(500).send('Server is not healthy');
   }
 });
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
 // Start the server
 try {
   gameServer.listen(port, () => {
