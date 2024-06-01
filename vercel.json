@@ -31,6 +31,7 @@
         "src": "/matchmake/(.*)",
         "dest": "/server/server.js"
       }
-    ]
+    ],
+    "cleanUrls": true
   }
   
