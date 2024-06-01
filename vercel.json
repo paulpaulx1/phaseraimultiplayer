@@ -16,20 +16,20 @@
     ],
     "rewrites": [
       {
-        "source": "/api/:path*",
-        "destination": "/server/server.js"
+        "source": "/api/(.*)",
+        "destination": "/api/$1"
       },
       {
-        "source": "/colyseus/:path*",
-        "destination": "/server/server.js"
+        "source": "/colyseus/(.*)",
+        "destination": "/colyseus/$1"
       },
       {
-        "source": "/matchmake/:path*",
-        "destination": "/server/server.js"
+        "source": "/matchmake/(.*)",
+        "destination": "/matchmake/$1"
       },
       {
-        "source": "/:path*",
-        "destination": "/client/:path*"
+        "source": "/(.*)",
+        "destination": "/client/$1"
       }
     ]
   }
