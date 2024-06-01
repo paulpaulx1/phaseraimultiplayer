@@ -24,11 +24,7 @@
         "dest": "/client/$1"
       },
       {
-        "src": "/colyseus/(.*)",
-        "dest": "/server/server.js"
-      },
-      {
-        "src": "/matchmake/(.*)",
+        "src": "/colyseus",
         "dest": "/server/server.js"
       }
     ]
