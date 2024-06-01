@@ -9,7 +9,10 @@ let npc;
 /*================================================
 | Colyseus connection with server
 */
-const client = new Colyseus.Client('ws://localhost:3000' );
+const isLocal = window.location.href.indexOf('localhost') > -1;
+let client = window.location.href;
+if (isLocal) client = new Colyseus.Client('ws://localhost:3000' );
+
 
 async function joinRoom() {
     try {
@@ -66,7 +69,7 @@ async function joinRoom() {
             delete onlinePlayers[message.sessionId];
         });
 
-        //handle NPC chat
+        //handle NPC chats
         room.onMessage("NPC_CHAT", message => {
             console.log('the message the message', message);
             const { npcId, message: response } = message;
