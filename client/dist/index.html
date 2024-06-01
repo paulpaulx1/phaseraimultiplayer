@@ -1,7 +1,39 @@
-<!doctype html><html><head><meta charset="utf-8"><style>#chatInput {
-          position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 300px;
-      }</style><script defer="defer" src="/bundle.min.js"></script></head><body><input id="chatInput" placeholder="Type your message here..."> <label for="chat-toggle">Enable Chatbot</label> <input type="radio" id="chat-toggle" name="chat-toggle"/></body></html>
+<!doctype html><html><head><meta charset="utf-8"/><style>body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* To prevent scrolling */
+        }
+        .chat-wrapper {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .chat-label {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .chat-label:hover {
+            background-color: #45a049;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        #chatInput {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }</style><script defer="defer" src="/bundle.min.js"></script></head><body><div class="chat-wrapper"><label for="chat-toggle" class="chat-label">Enable Chatbot</label> <input type="radio" id="chat-toggle" name="chat-toggle"/> <input id="chatInput" placeholder="Type your message here..."/></div><script>document.getElementById('chatLabel').addEventListener('click', function() {
+          const chatToggle = document.getElementById('chat-toggle');
+          chatToggle.checked = !chatToggle.checked;
+      });</script><script src="bundle.min.js"></script></body></html>
