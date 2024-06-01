@@ -20,12 +20,16 @@
         "dest": "/server/server.js"
       },
       {
-        "src": "/(.*)",
-        "dest": "/client/$1"
-      },
-      {
         "src": "/matchmake/(.*)",
         "dest": "/server/server.js"
+      },
+      {
+        "src": "/colyseus/(.*)",
+        "dest": "/server/server.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/dist/$1"
       }
     ]
   }
