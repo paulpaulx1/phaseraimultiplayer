@@ -1,4 +1,4 @@
-let SERVER_URL = window.location.href;
+let SERVER_URL = window.location.origin;
 const isLocal = window.location.href.indexOf('localhost') > -1;
 if (isLocal) SERVER_URL = 'http://localhost:3000';
 
