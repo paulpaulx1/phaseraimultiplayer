@@ -3,13 +3,16 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "build": "npm install --prefix client && npm install --prefix client webpack-cli && npm run build --prefix client && npm install --prefix server",
-      "start": "node server/server.js",
-      "postinstall": "cd client && npm install"
+        "build": "npm install --prefix client && npm install --prefix client webpack-cli && npm run build --prefix client && npm install --prefix server",
+        "start": "node server/server.js",
+        "postinstall": "cd client && npm install"
     },
     "engines": {
-      "node": "18.x",
-      "npm": "8.x"
+        "node": "18.x",
+        "npm": "8.x"
+    },
+    "dependencies": {
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4"
     }
-  }
-  
+}
