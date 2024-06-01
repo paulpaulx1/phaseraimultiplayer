@@ -10,7 +10,7 @@ let npc;
 | Colyseus connection with server
 */
 const isLocal = window.location.href.indexOf('localhost') > -1;
-let client = window.location.href;
+let client = new Colyseus.Client(window.location.href);
 if (isLocal) client = new Colyseus.Client('ws://localhost:3000' );
 
 

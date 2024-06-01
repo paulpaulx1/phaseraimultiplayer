@@ -18,5 +18,4 @@ const Config = {
     scene: [Scene1, Scene2],
 };
 
-console.log("Game Starting,a environment", process.env)
 export default new Phaser.Game(Config);
