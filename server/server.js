@@ -33,7 +33,7 @@ try {
 }
 
 // Chatbot endpoint
-app.post('/api/chat', async (req, res) => {
+app.post('api/chat', async (req, res) => {
   const { sessionId, message } = req.body;
   try {
     const response = await handleMessage(sessionId, message);
@@ -61,9 +61,9 @@ app.get('/health', (req, res) => {
     res.status(500).send('Server is not healthy');
   }
 });
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+// });
 // Start the server
 try {
   gameServer.listen(port, () => {
