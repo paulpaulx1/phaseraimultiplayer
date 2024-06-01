@@ -8,7 +8,7 @@
       "postinstall": "cd client && npm install webpack-cli"
     },
     "engines": {
-      "node": ">=14",
-      "npm": ">=6"
+        "node": ">=18.12.0",
+        "npm": ">=7"
     }
   }
