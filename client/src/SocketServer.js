@@ -10,8 +10,12 @@ let npc;
 | Colyseus connection with server
 */
 const isLocal = window.location.href.indexOf('localhost') > -1;
-let client = new Colyseus.Client(window.location.href);
-if (isLocal) client = new Colyseus.Client('ws://localhost:3000' );
+
+if (isLocal) {
+    client = new Colyseus.Client('ws://localhost:3000' );
+} else {
+    client = new Colyseus.Client('wss://phaseraimultiplayer.vercel.app');
+}
 
 
 async function joinRoom() {
