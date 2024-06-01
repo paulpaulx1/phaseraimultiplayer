@@ -20,6 +20,10 @@
         "dest": "/server/server.js"
       },
       {
+        "src": "/matchmake/(.*)",
+        "dest": "/server/server.js"
+      },
+      {
         "src": "/(.*)",
         "dest": "/client/$1"
       },
@@ -27,6 +31,7 @@
         "src": "/colyseus",
         "dest": "/server/server.js"
       },
+
       {
         "src": "/health",
         "dest":"/server/server.js"
