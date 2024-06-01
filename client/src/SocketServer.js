@@ -20,7 +20,7 @@ if (isLocal) {
 
 console.log('client', client);
 
-
+//
 async function joinRoom() {
     try {
         const room = await client.joinOrCreate("poke_world");
