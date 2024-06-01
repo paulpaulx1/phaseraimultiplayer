@@ -15,14 +15,6 @@
     "url": "https://github.com/colyseus/create-colyseus/issues"
   },
   "homepage": "https://github.com/colyseus/create-colyseus#readme",
-  "devDependencies": {
-    "@colyseus/loadtest": "^0.15.0",
-    "@colyseus/monitor": "^0.15.0",
-    "@colyseus/redis-driver": "^0.15.0",
-    "@colyseus/redis-presence": "^0.15.0",
-    "@colyseus/uwebsockets-transport": "^0.15.0",
-    "@colyseus/ws-transport": "^0.15.0"
-  },
   "dependencies": {
     "@colyseus/loadtest": "^0.15.0",
     "@colyseus/monitor": "^0.15.0",
@@ -35,6 +27,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.16.4",
-    "express-jwt": "^6.0.0"
+    "express-jwt": "^6.0.0",
+    "nodemon": "^2.0.15",
+    "langsmith": "^0.1.0" 
   }
 }
