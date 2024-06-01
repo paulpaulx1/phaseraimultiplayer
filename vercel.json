@@ -16,12 +16,16 @@
     ],
     "routes": [
       {
-        "src": "/(.*)",
+        "src": "/api/(.*)",
         "dest": "/server/server.js"
       },
       {
         "src": "/(.*)",
         "dest": "/client/$1"
+      },
+      {
+        "src": "/matchmake/(.*)",
+        "dest": "/server/server.js"
       }
     ]
   }
