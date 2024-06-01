@@ -1,6 +1,8 @@
 const http = require("http");
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
+
 const colyseus = require("colyseus");
 const monitor = require("@colyseus/monitor").monitor;
 const { handleMessage } = require("./chatbot.js");
