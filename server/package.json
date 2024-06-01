@@ -24,7 +24,12 @@
     "@colyseus/ws-transport": "^0.15.0"
   },
   "dependencies": {
+    "@colyseus/loadtest": "^0.15.0",
     "@colyseus/monitor": "^0.15.0",
+    "@colyseus/redis-driver": "^0.15.0",
+    "@colyseus/redis-presence": "^0.15.0",
+    "@colyseus/uwebsockets-transport": "^0.15.0",
+    "@colyseus/ws-transport": "^0.15.0",
     "@langchain/openai": "^0.1.0",
     "colyseus": "^0.15.0",
     "cors": "^2.8.5",
