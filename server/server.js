@@ -2,9 +2,8 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const colyseus = require("colyseus");
-const monitor = require("@colyseus/monitor").monitor;
+const { monitor } = require("@colyseus/monitor");
 const { handleMessage } = require("./chatbot.js");
-
 const PokeWorld = require("./rooms/PokeWorld").PokeWorld;
 
 const port = process.env.PORT || 3000;
@@ -18,7 +17,7 @@ const gameServer = new colyseus.Server({
   server: server,
 });
 
-// register your room handlers
+// Register your room handlers
 gameServer
   .define("poke_world", PokeWorld)
   .on("create", (room) => console.log("room created:", room.roomId))
