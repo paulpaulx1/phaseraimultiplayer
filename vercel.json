@@ -26,6 +26,10 @@
       {
         "src": "/colyseus",
         "dest": "/server/server.js"
+      },
+      {
+        "src": "/health",
+        "dest":"/server/server.js"
       }
     ]
   }
