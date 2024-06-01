@@ -4,8 +4,7 @@
     "private": true,
     "scripts": {
       "build": "npm install --prefix client && npm run build --prefix client && npm install --prefix server",
-      "start": "node server/server.js",
-      "postinstall": "cd client && npm install webpack-cli"
+      "start": "node server/server.js"
     },
     "engines": {
         "node": ">=18.12.0",
