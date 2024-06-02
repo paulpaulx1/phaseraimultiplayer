@@ -1,57 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* To prevent scrolling */
-        }
-        .chat-wrapper {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .chat-label {
-            cursor: pointer;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-        .chat-label:hover {
-            background-color: #45a049;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-        #chatInput {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-    <div class="chat-wrapper">
-        <label for="chat-toggle" class="chat-label">Enable Chatbot</label>
-        <input type="radio" id="chat-toggle" name="chat-toggle" />
-        <input type="text" id="chatInput" placeholder="Type your message here..." />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="flex justify-center h-screen bg-gray-100">
+    <div
+      class="chat-wrapper fixed bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-4"
+    >
+      <label
+        id="chatLabel"
+        class="chat-label cursor-pointer px-6 py-2 bg-green-500 text-white rounded-lg shadow-md transition-all duration-300 hover:bg-green-600 hover:shadow-lg"
+        >Enable Chatbot</label
+      >
+      <input type="radio" id="chat-toggle" name="chat-toggle" class="hidden" />
+      <input
+        id="chatInput"
+        placeholder="Type your message here..."
+        class="w-64 px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
+      />
     </div>
     <script>
-      document.getElementById('chatLabel').addEventListener('click', function() {
-          const chatToggle = document.getElementById('chat-toggle');
-          chatToggle.checked = !chatToggle.checked;
+      const chatLabel = document.getElementById("chatLabel");
+      const chatToggle = document.getElementById("chat-toggle");
+
+      chatLabel.addEventListener("click", function () {
+        chatToggle.checked = !chatToggle.checked;
+        chatLabel.classList.toggle("bg-green-500", !chatToggle.checked);
+        chatLabel.classList.toggle("bg-red-500", chatToggle.checked);
       });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

@@ -31,6 +31,14 @@ export class Scene1 extends Phaser.Scene {
 
         this.scene.start("playGame", {map: 'town', playerTexturePosition: 'front'});
 
+        const canvas = document.querySelector('canvas');
+
+        // Apply styles to the canvas element
+        canvas.style.border = '2px solid black';
+        canvas.style.position = 'absolute';
+        canvas.style.top = '50px';
+        canvas.style.borderRadius = '10px';
+
         // Create the player's walking animations from the texture currentPlayer. These are stored in the global
         // animation manager so any sprite can access them.
         this.anims.create({

@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { room } from './SocketServer';
+import { chatBubbleStyle } from "./constants/chatBubbleStyle";
 
 export default class Player extends Phaser.GameObjects.Sprite {
     constructor(config) {
@@ -32,12 +33,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.canChangeMap = true;
 
         // Chat bubble
-        this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', {
-            fontSize: '12px',
-            fill: '#fff',
-            backgroundColor: '#000',
-            padding: { x: 10, y: 5 }
-        }).setOrigin(0.5).setVisible(false);
+        this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', chatBubbleStyle).setOrigin(0.5).setVisible(false);
 
         // Add spacebar input
         this.spacebar = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

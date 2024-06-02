@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { chatBubbleStyle } from "./constants/chatBubbleStyle";
 
 export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
     constructor(config) {
@@ -17,12 +18,7 @@ export default class OnlinePlayer extends Phaser.GameObjects.Sprite {
         this.body.setOffset(0, 24);
 
         // Chat bubble
-        this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', {
-            fontSize: '12px',
-            fill: '#fff',
-            backgroundColor: '#000',
-            maxWidth: 200,
-        }).setOrigin(0.5).setVisible(false);
+        this.chatBubble = this.scene.add.text(this.x, this.y - 45, '', chatBubbleStyle).setOrigin(0.5).setVisible(false);
     }
 
     isWalking(position, x, y) {

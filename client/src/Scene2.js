@@ -221,7 +221,7 @@ export class Scene2 extends Phaser.Scene {
       scene: this,
       key: "player", // This should be the key for the NPC's sprite
       x: spawnPoint.x + 100, // Set the desired x position
-      y: spawnPoint.y - 200, // Set the desired y position
+      y: spawnPoint.y - 220, // Set the desired y position
     });
 
     this.npcs[this.npc.id] = this.npc;
@@ -250,6 +250,10 @@ export class Scene2 extends Phaser.Scene {
         this.handleNPCInteraction(message);
         chatInput.value = "";
         this.sendMessage(message);
+      }
+      if (event.key === "Enter" && !document.getElementById("chat-toggle").checked) {
+        this.sendMessage(chatInput.value);
+        chatInput.value = "";
       }
     });
   }
@@ -293,17 +297,6 @@ export class Scene2 extends Phaser.Scene {
 
       });
     }
-    // room.then((roomInstance) => {
-    //   try {
-    //     roomInstance.send("NPC_CHAT", {
-    //       npcId: this.npc.id, // Ensure the NPC has an id if required
-    //       message: message,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    //   console.log("NPC_CHAT sent", message);
-    // });
   }
 
   update(time, delta) {
